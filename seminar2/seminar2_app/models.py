@@ -8,7 +8,7 @@ class Client(models.Model):
     sign_up_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return f"Name: {self.name}, email: {self.email}, phone number: {self.phone_number}, adress: {self.adress} registration date: {sign_up_date}"
+        return f"Name: {self.name}, email: {self.email}, phone number: {self.phone_number}, adress: {self.adress} registration date: {self.sign_up_date}"
 
 class Product(models.Model):
     name = models.CharField(max_length=42)
@@ -28,4 +28,4 @@ class Order(models.Model):
 
     def __str__(self):
         products_str = ", ".join([product.name for product in self.products.all])
-        return f"Client: {self.client.name}, sum of order: {order_sum}, order date: {order_date}\nProducts: {products_str}"
+        return f"Client: {self.client.name}, sum of order: {self.order_sum}, order date: {self.order_date}\nProducts: {products_str}"
