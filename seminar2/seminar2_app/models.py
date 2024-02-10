@@ -7,6 +7,9 @@ class Client(models.Model):
     adress = models.CharField(max_length=100)
     sign_up_date = models.DateField(auto_now_add=True)
 
+    def __str__(self):
+        return f"Name: {self.name}, email: {self.email}, phone number: {self.phone_number}, adress: {self.adress} registration date: {sign_up_date}"
+
 class Product(models.Model):
     name = models.CharField(max_length=42)
     description = models.CharField(max_length=100)
@@ -14,8 +17,15 @@ class Product(models.Model):
     quantity = models.IntegerField()
     addition_date = models.DateField(auto_now_add=True)
 
+    def __str__(self):
+        return f"Name: {self.name}, description: {self.description}, price: {self.price}, quantity: {self.quantity}, addition date: {self.addition_date}"
+
 class Order(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)
     order_sum = models.DecimalField(max_digits=10, decimal_places=2)
     order_date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        products_str = ", ".join([product.name for product in self.products.all])
+        return f"Client: {self.client.name}, sum of order: {order_sum}, order date: {order_date}\nProducts: {products_str}"
