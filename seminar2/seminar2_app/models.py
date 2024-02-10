@@ -8,7 +8,7 @@ class Client(models.Model):
     sign_up_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return f"Name: {self.name}, email: {self.email}, phone number: {self.phone_number}, adress: {self.adress} registration date: {self.sign_up_date}"
+        return f"Name: {self.name}, email: {self.email}, phone number: {self.phone_number}, adress: {self.adress}, registration date: {self.sign_up_date}"
 
 class Product(models.Model):
     name = models.CharField(max_length=42)
