@@ -27,5 +27,4 @@ class Order(models.Model):
     order_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        products_str = ", ".join([product.name for product in self.products.all])
-        return f"Client: {self.client.name}, sum of order: {self.order_sum}, order date: {self.order_date}\nProducts: {products_str}"
+        return f"Client: {self.client.name}, sum of order: {self.order_sum}, order date: {self.order_date}"
