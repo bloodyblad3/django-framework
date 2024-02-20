@@ -1,6 +1,8 @@
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, get_object_or_404
 from datetime import datetime, timedelta
 from .models import Order, Client
+from .forms import ImageForm
 
 def index(request):
     return render(request, "seminar2_app/index.html")
@@ -19,3 +21,14 @@ def get_orders(request, client_id):
     }
 
     return render(request, "seminar2_app/orders.html", context)
+
+def upload_image(request):
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.cleaned_data['image']
+            fs = FileSystemStorage()
+            fs.save(image.name, image)
+    else:
+        form = ImageForm()
+    return render(request, "seminar2_app/upload_image.html", {"form": form})
