@@ -9,9 +9,9 @@ def index(request):
 
 def get_orders(request, client_id):
     client = get_object_or_404(Client, pk=client_id)
-    last_week_orders = Order.objects.filter(client=client, order_date=datetime.now() - timedelta(days=7))
-    last_month_orders = Order.objects.filter(client=client, order_date=datetime.now() - timedelta(days=30))
-    last_year_orders = Order.objects.filter(client=client, order_date=datetime.now() - timedelta(days=365))
+    last_week_orders = Order.objects.filter(client=client, order_date__gte=datetime.now() - timedelta(days=7))
+    last_month_orders = Order.objects.filter(client=client, order_date__gte=datetime.now() - timedelta(days=30))
+    last_year_orders = Order.objects.filter(client=client, order_date__gte=datetime.now() - timedelta(days=365))
 
     context = {
         'client': client,
